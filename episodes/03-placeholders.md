@@ -1,45 +1,37 @@
 ---
-title: "Placeholders"
+title: Segnaposto
 teaching: 40
 exercises: 30
 ---
 
+
 ::: questions
 
-- "How do I make a generic rule?"
+- "Come si crea una regola generica?"
 
 :::
 
 ::: objectives
 
-- "See how Snakemake deals with some errors"
+- "Vedere come Snakemake gestisce alcuni errori"
 
 :::
 
-Our Snakefile has some duplication. For example, the names of text
-files are repeated in places throughout the Snakefile rules. Snakefiles are
-a form of code and, in any code, repetition can lead to problems (e.g. we rename
-a data file in one part of the Snakefile but forget to rename it elsewhere).
+Il nostro Snakefile presenta alcune duplicazioni. Per esempio, i nomi dei file di testo sono ripetuti in alcuni punti delle regole dello Snakefile. Gli Snakefile sono una forma di codice e, in qualsiasi codice, la ripetizione può portare a problemi (ad esempio, rinominiamo un file di dati in una parte dello Snakefile, ma dimentichiamo di rinominarlo altrove).
 
 ::: callout
+
 ## D.R.Y. (Don't Repeat Yourself)
 
-In many programming languages, the bulk of the language features are
-there to allow the programmer to describe long-winded computational
-routines as short, expressive, beautiful code.  Features in Python,
-R, or Java, such as user-defined variables and functions are useful in
-part because they mean we don't have to write out (or think about)
-all of the details over and over again.  This good habit of writing
-things out only once is known as the "Don't Repeat Yourself"
-principle or D.R.Y.
+In molti linguaggi di programmazione, la maggior parte delle caratteristiche del linguaggio serve a consentire al programmatore di descrivere lunghe routine di calcolo come codice breve, espressivo e bello. Le caratteristiche di Python, R o Java, come le variabili e le funzioni definite dall'utente, sono utili in parte perché ci evitano di dover scrivere (o pensare) tutti i dettagli più volte. Questa buona abitudine di scrivere le cose solo una volta è nota come principio "Non ripetere te stesso" o D.R.Y.
+
 :::
 
-Let us set about removing some of the repetition from our Snakefile.
+Rimuoviamo alcune ripetizioni dal nostro Snakefile.
 
-## Placeholders
+## Segnaposto
 
-To make a more general-purpose rule we need **placeholders**. Let's take a look
-at what a placeholder looks like
+Per creare una regola più generica abbiamo bisogno di **placeholder**. Vediamo l'aspetto di un segnaposto
 
 ```python
 rule hostname_remote:
@@ -50,7 +42,7 @@ rule hostname_remote:
 
 ```
 
-As a reminder, here's the previous version from the last episode:
+Come promemoria, ecco la versione precedente dell'ultimo episodio:
 
 ```python
 rule hostname_remote:
@@ -61,24 +53,19 @@ rule hostname_remote:
 
 ```
 
-The new rule has replaced explicit file names with things in `{curly brackets}`,
-specifically `{output}` (but it could also have been `{input}`...if that had
-a value and were useful).
+La nuova regola ha sostituito i nomi di file espliciti con cose in `{curly brackets}`, in particolare `{output}` (ma avrebbe potuto essere anche `{input}`... se avesse avuto un valore e fosse stato utile).
 
-### `{input}` and `{output}` are **placeholders**
+### `{input}` e `{output}` sono **dei segnaposto**
 
-Placeholders are used in the `shell` section of a rule, and Snakemake will
-replace them with appropriate values - `{input}` with the full name of the input
-file, and
-`{output}` with the full name of the output file -- before running the command.
+I segnaposto sono usati nella sezione `shell` di una regola e Snakemake li sostituisce con valori appropriati - `{input}` con il nome completo del file di input e `{output}` con il nome completo del file di output - prima di eseguire il comando.
 
-`{resources}` is also a placeholder, and we can access a named element of the
-`{resources}` with the notation `{resources.runtime}` (for example).
+anche `{resources}` è un segnaposto e si può accedere a un elemento nominato di `{resources}` con la notazione `{resources.runtime}` (per esempio).
 
 :::keypoints
 
-- "Snakemake rules are made more generic with placeholders"
-- "Placeholders in the shell part of the rule are replaced with values based on
-  the chosen wildcards"
+- "Le regole di Snakemake sono rese più generiche con i segnaposto"
+- "I segnaposto nella parte shell della regola vengono sostituiti con valori basati sui caratteri jolly scelti"
 
 :::
+
+

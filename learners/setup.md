@@ -1,29 +1,26 @@
 ---
-title: Setup
+title: Configurazione
 ---
 
-FIXME: Setup instructions live in this document. Please specify the tools and
-the data sets the Learner needs to have installed.
 
-## Data Sets
+FISSO: le istruzioni per l'installazione sono contenute in questo documento. Specificare gli strumenti e i set di dati che l'allievo deve avere installato.
+
+## Insiemi di dati
 
 <!--
 FIXME: place any data you want learners to use in `episodes/data` and then use
        a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
        link to it, replacing the example.com link.
 -->
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
+Scaricare il [file zip dei dati](https://example.com/FIXME) e decomprimerlo sul Desktop
 
-## Software Setup
+## Configurazione del software
 
 ::::::::::::::::::::::::::::::::::::::: discussion
 
-### Details
+### Dettagli
 
-Setup for different systems can be presented in dropdown menus via a `solution`
-tag. They will join to this discussion block, so you can give a general overview
-of the software used in this lesson here and fill out the individual operating
-systems (and potentially add more, e.g. online setup) in the solutions blocks.
+Le impostazioni per i diversi sistemi possono essere presentate in menu a discesa tramite un tag `solution`. Essi si uniranno a questo blocco di discussione, quindi è possibile fornire una panoramica generale del software utilizzato in questa lezione qui e compilare i singoli sistemi operativi (e potenzialmente aggiungerne altri, ad esempio la configurazione online) nei blocchi delle soluzioni.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -31,7 +28,7 @@ systems (and potentially add more, e.g. online setup) in the solutions blocks.
 
 ### Windows
 
-Use PuTTY
+Utilizzare PuTTY
 
 :::::::::::::::::::::::::
 
@@ -39,7 +36,7 @@ Use PuTTY
 
 ### MacOS
 
-Use Terminal.app
+Utilizzare Terminal.app
 
 :::::::::::::::::::::::::
 
@@ -48,7 +45,8 @@ Use Terminal.app
 
 ### Linux
 
-Use Terminal
+Utilizzare il Terminale
 
 :::::::::::::::::::::::::
+
 
