@@ -79,4 +79,16 @@ profiles:
 #
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
+url: 'https://carpentries-incubator.github.io/hpc-workflows'
+analytics: carpentries
 lang: it
+
+languages:
+  default: Italiano
+  other:
+    - lang: Deutsch
+      url: "https://biont-training.github.io/hpc-workflows-de"
+    - lang: English
+      url: "https://biont-training.github.io/hpc-workflows-en"
+    - lang: "Español"
+      url: "https://biont-training.github.io/hpc-workflows-es"
