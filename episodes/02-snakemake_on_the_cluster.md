@@ -13,7 +13,7 @@ exercises: 20
 
 ::: questions
 
-- "Come si esegue la mia regola di Snakemake nel cluster?"
+- "Come si esegue la regola di Snakemake nel cluster?"
 
 :::
 
@@ -45,7 +45,7 @@ Ricostruendo i file solo quando necessario, Snakemake rende l'elaborazione più 
 
 ## In esecuzione sul cluster
 
-Ora abbiamo bisogno di un'altra regola che esegua la `hostname` sul _cluster_. Creare una nuova regola nel file Snake e provare a eseguirla sul cluster con le opzioni da `--executor slurm` a `snakemake`.
+Ora abbiamo bisogno di un'altra regola che esegua la `hostname` sul _cluster_. Creare una nuova regola nel Snakefile e provare a eseguirla sul cluster con le opzioni da `--executor slurm` a `snakemake`.
 
 :::::: solution
 
