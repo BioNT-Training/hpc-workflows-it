@@ -62,7 +62,7 @@ Executable: amdahl
 ...
 ```
 
-Quindi, anche se abbiamo caricato il modulo prima di eseguire il flusso di lavoro, la nostra regola Snakemake non ha trovato l'eseguibile. Questo perché la regola Snakemake viene eseguita in un ambiente _runtime_ pulito e dobbiamo dirgli in qualche modo di caricare il modulo ambiente necessario prima di provare a eseguire la regola.
+Quindi, anche se abbiamo caricato il modulo prima di eseguire il flusso di lavoro, la nostra regola Snakemake non ha trovato l'eseguibile. Questo perché la regola viene eseguita in un ambiente _runtime_ pulito e dobbiamo dirgli in qualche modo di caricare il modulo ambiente necessario prima di provare a eseguirla.
 
 ::::::
 
@@ -71,7 +71,7 @@ Quindi, anche se abbiamo caricato il modulo prima di eseguire il flusso di lavor
 
 ## Snakemake e moduli di ambiente
 
-La nostra applicazione si chiama `amdahl` ed è disponibile sul sistema tramite un modulo d'ambiente, quindi dobbiamo dire a Snakemake di caricare il modulo prima di provare a eseguire la regola. Snakemake conosce i moduli d'ambiente, che possono essere specificati tramite (un'altra) opzione:
+La nostra applicazione si chiama `amdahl` ed è disponibile sul sistema tramite un modulo d'ambiente, quindi dobbiamo dire a Snakemake di caricare il modulo prima di provare a eseguirla. Snakemake conosce i moduli d'ambiente, che possono essere specificati tramite (un'altra) opzione:
 
 ```python
 rule amdahl_run:
@@ -119,7 +119,7 @@ Se si vuole testare, è necessario cancellare il file di output della regola e r
 
 Nell'ultima sezione non abbiamo eseguito un'applicazione MPI, in quanto abbiamo eseguito solo su un core. Come si fa a richiedere l'esecuzione su più core per una singola regola?
 
-Snakemake ha un supporto generale per MPI, ma l'unico esecutore che attualmente supporta esplicitamente MPI è l'esecutore Slurm (per nostra fortuna!). Se guardiamo alla nostra tabella di traduzione da Slurm a Snakemake, notiamo che le opzioni rilevanti appaiono in fondo:
+Snakemake ha un supporto generale per MPI, ma l'unico esecutore che attualmente supporta esplicitamente MPI è Slurm (per nostra fortuna!). Se guardiamo alla nostra tabella di traduzione da Slurm a Snakemake, notiamo che le opzioni rilevanti appaiono in fondo:
 
 | SLURM             | Snakemake       | Description                                                    |
 | ----------------- | --------------- | -------------------------------------------------------------- |
@@ -156,7 +156,7 @@ dove `parallel_tasks` è il nostro carattere jolly.
 
 ::: callout
 
-## Caratteri jolly
+## Wildcards or Caratteri jolly
 
 I caratteri jolly sono usati nelle righe `input` e `output` della regola per rappresentare parti di nomi di file. Come lo schema `*` nella shell, il carattere jolly può sostituire qualsiasi testo per comporre il nome del file desiderato. Come per la denominazione delle regole, si può scegliere un nome a piacere per i caratteri jolly, qui abbiamo usato `parallel_tasks`. L'uso degli stessi caratteri jolly nell'input e nell'output indica a Snakemake come abbinare i file di input a quelli di output.
 
@@ -176,12 +176,12 @@ Abbiamo appena iniziato con alcune semplici regole, ma vale la pena di pensare a
     1. vede quale/i file si sta chiedendo di creare
     1. Cerca una regola corrispondente guardando le `output` di tutte le regole che conosce
     1. Compila i caratteri jolly per ottenere il valore `input` per questa regola
-    1. verifica che questo file di input (se richiesto) sia effettivamente disponibile
+    1. Verifica che questo file di input (se richiesto) sia effettivamente disponibile
 1. Esegue i passi:
-    1. Crea la directory per il file di output, se necessario
+    1. Crea la cartella per il file di output, se necessario
     1. Rimuove il vecchio file di output, se è già presente
     1. Solo allora, esegue il comando di shell con i segnaposto sostituiti
-    1. controlla che il comando sia stato eseguito senza errori *e* che il nuovo file di output sia stato creato come previsto
+    1. Controlla che il comando sia stato eseguito senza errori *e* che il nuovo file di output sia stato creato come previsto
 
 ::: callout
 
@@ -251,9 +251,8 @@ rule amdahl_run:
       "amdahl"
     resources:
       mpi="mpiexec",
-      # No direct way to access the wildcard in tasks, so we need to do this
-      # indirectly by declaring a short function that takes the wildcards as an
-      # argument
+      # Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i
+      # wildcard come argomento.
       tasks=lambda wildcards: int(wildcards.parallel_tasks)
     input:
     shell:
@@ -270,7 +269,7 @@ Nel codice precedente, la riga che inizia con `#` è una riga di commento. Si sp
 
 :::
 
-Poiché la nostra regola è ora in grado di generare un numero arbitrario di file di output, le cose potrebbero diventare molto affollate nella nostra directory corrente. Probabilmente è meglio mettere le esecuzioni in una cartella separata per mantenere l'ordine. Possiamo aggiungere la cartella direttamente al nostro `output` e Snakemake si occuperà della creazione della directory per noi:
+Poiché la nostra regola è ora in grado di generare un numero arbitrario di file di output, le cose potrebbero diventare molto affollate nella nostra cartella corrente. Probabilmente è meglio mettere le esecuzioni in una cartella separata per mantenere l'ordine. Possiamo aggiungere la cartella direttamente al nostro `output` e Snakemake si occuperà della creazione della directory per noi:
 
 ```python
 rule amdahl_run:
@@ -280,9 +279,8 @@ rule amdahl_run:
       "amdahl"
     resources:
       mpi="mpiexec",
-      # No direct way to access the wildcard in tasks, so we need to do this
-      # indirectly by declaring a short function that takes the wildcards as an
-      # argument
+      # Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i
+      # wildcard come argomento.
       tasks=lambda wildcards: int(wildcards.parallel_tasks)
     input:
     shell:
@@ -335,16 +333,15 @@ rule amdahl_run:
       "amdahl"
     resources:
       mpi="mpiexec",
-      # No direct way to access the wildcard in tasks, so we need to do this
-      # indirectly by declaring a short function that takes the wildcards as an
-      # argument
+      # Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i
+      # wildcard come argomento.
       tasks=lambda wildcards: int(wildcards.parallel_tasks)
     input:
     shell:
         "{resources.mpi} -n {resources.tasks} amdahl --terse > {output}"
 ```
 
-C'era un altro parametro per `amdahl` che ha attirato la mia attenzione. `amdahl` ha un'opzione `--parallel-proportion` (o `-p`) che potremmo essere interessati a cambiare perché modifica il comportamento del codice e quindi ha un impatto sui valori che otteniamo nei nostri risultati. Aggiungiamo un altro livello di directory al nostro formato di output per riflettere una scelta particolare per questo valore. Possiamo usare un carattere jolly in modo da non dover scegliere subito il valore:
+C'era un altro parametro per `amdahl` che ha attirato la mia attenzione. `amdahl` ha un'opzione `--parallel-proportion` (o `-p`) che potremmo essere interessati a cambiare perché modifica il comportamento del codice e quindi ha un impatto sui valori che otteniamo nei nostri risultati. Aggiungiamo un altro livello di cartelle al nostro formato di output per riflettere una scelta particolare per questo valore. Possiamo usare un carattere jolly in modo da non dover scegliere subito il valore:
 
 ```python
 rule amdahl_run:
@@ -354,9 +351,8 @@ rule amdahl_run:
       "amdahl"
     resources:
       mpi="mpiexec",
-      # No direct way to access the wildcard in tasks, so we need to do this
-      # indirectly by declaring a short function that takes the wildcards as an
-      # argument
+      # Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i
+      # wildcard come argomento.
       tasks=lambda wildcards: int(wildcards.parallel_tasks)
     input:
     shell:
