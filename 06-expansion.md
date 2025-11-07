@@ -38,7 +38,7 @@ Per fare questo, possiamo definire alcuni elenchi come **variabili globali** di 
 Le variabili globali devono essere aggiunte prima delle regole nel file Snake.
 
 ```python
-# Task sizes we wish to run
+# Dimensioni dei task che vogliamo eseguire
 NTASK_SIZES = [1, 2, 3, 4, 5]
 ```
 
