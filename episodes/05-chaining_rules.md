@@ -128,7 +128,7 @@ Questo, in breve, è il modo in cui costruiamo i flussi di lavoro in Snakemake.
 1. Scegliere modelli di denominazione `input` e `output` che consentano a Snakemake di collegare le regole
 1. Indica a Snakemake di generare i file di output finali
 
-Se si è abituati a scrivere script regolari, ci vuole un po' di tempo per abituarsi. Invece di elencare i passi in ordine di esecuzione, si lavora sempre a ritroso** dal risultato finale desiderato. L'ordine delle operazioni è determinato dall'applicazione delle regole di corrispondenza dei pattern ai nomi dei file, non dall'ordine delle regole nel file Snake.
+Se si è abituati a scrivere script regolari, ci vuole un po' di tempo per abituarsi. Invece di elencare i passi in ordine di esecuzione, si lavora sempre a ritroso** dal risultato finale desiderato. L'ordine delle operazioni è determinato dall'applicazione delle regole di corrispondenza dei pattern ai nomi dei file, non dall'ordine delle regole nel Snakefile.
 
 ::: callout
 
