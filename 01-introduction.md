@@ -60,7 +60,7 @@ rule hostname_login:
 ## Punti chiave di questo file
 
 1. Il file si chiama `Snakefile` - con la maiuscola `S` e senza estensione.
-1. Alcune righe sono rientrate. I rientri devono essere fatti con caratteri di spazio, non con tabulazioni. Si veda la sezione di impostazione per sapere come far sì che il proprio editor di testo faccia questo.
+1. Alcune righe sono rientrate. I rientri devono essere fatti con spazi, non con tabulazioni. Si veda la sezione di impostazione per sapere come far sì che il proprio editor di testo faccia questo.
 1. La definizione della regola inizia con la parola chiave `rule` seguita dal nome della regola, poi da due punti.
 1. Abbiamo chiamato la regola `hostname_login`. Si possono usare lettere, numeri o trattini bassi, ma il nome della regola deve iniziare con una lettera e non può essere una parola chiave.
 1. Le parole chiave `input`, `output` e `shell` sono tutte seguite da due punti (":").
@@ -136,10 +136,10 @@ snakemake -j1 -p hostname_login
 
 Eseguire `snakemake --help | less` per vedere la guida per tutte le opzioni disponibili. Che cosa fa l'opzione `-p` nel comando `snakemake` di cui sopra?
 
-1. protegge i file di output esistenti
-1. stampa i comandi di shell che vengono eseguiti sul terminale
+1. Protegge i file di output esistenti
+1. Stampa i comandi di shell che vengono eseguiti sul terminale
 1. Indica a Snakemake di eseguire solo un processo alla volta
-1. chiede all'utente il file di input corretto
+1. Chiede all'utente il file di input corretto
 
 :::::: hint
 
@@ -160,10 +160,10 @@ Questa è una cosa così utile che non sappiamo perché non sia l'opzione predef
 
 ::: keypoints
 
-- "Prima di eseguire Snakemake è necessario scrivere uno Snakefile"
+- "Prima di eseguire Snakemake è necessario creare uno Snakefile"
 - "Uno Snakefile è un file di testo che definisce un elenco di regole"
 - "Le regole hanno ingressi, uscite e comandi di shell da eseguire"
-- "Si dice a Snakemake quale file creare e questo esegue il comando di shell definito nella regola appropriata"
+- "Si devi dire a Snakemake quale file creare e questo esegue il comando di shell definito nella regola appropriata"
 
 :::
 
