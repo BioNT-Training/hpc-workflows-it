@@ -732,7 +732,7 @@ Snakefile e provare a eseguirla sul cluster con le opzioni da
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Mostrami la soluzione </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>La regola è quasi identica alla regola precedente, tranne che per il
 nome della regola e il file di output:</p>
@@ -956,7 +956,7 @@ Slurm.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Mostrami la soluzione </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1156,7 +1156,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-04-snakemake_and_mpi"><p>Content from <a href="04-snakemake_and_mpi.html">Applicazioni MPI e Snakemake</a></p>
 <hr>
-<p>Ultimo aggiornamento il 2025-04-05 |
+<p>Ultimo aggiornamento il 2025-11-07 |
 
         <a href="https://github.com/carpentries-incubator/hpc-workflows/edit/main/episodes/04-snakemake_and_mpi.md" class="external-link">Modifica questa pagina <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Tempo stimato: <i aria-hidden="true" data-feather="clock"></i> 50 minuti</p>
@@ -1262,10 +1262,9 @@ Executable: amdahl
 </div>
 <p>Quindi, anche se abbiamo caricato il modulo prima di eseguire il
 flusso di lavoro, la nostra regola Snakemake non ha trovato
-l’eseguibile. Questo perché la regola Snakemake viene eseguita in un
-ambiente <em>runtime</em> pulito e dobbiamo dirgli in qualche modo di
-caricare il modulo ambiente necessario prima di provare a eseguire la
-regola.</p>
+l’eseguibile. Questo perché la regola viene eseguita in un ambiente
+<em>runtime</em> pulito e dobbiamo dirgli in qualche modo di caricare il
+modulo ambiente necessario prima di provare a eseguirla.</p>
 </div>
 </div>
 </div>
@@ -1275,9 +1274,9 @@ regola.</p>
 <hr class="half-width">
 <p>La nostra applicazione si chiama <code>amdahl</code> ed è disponibile
 sul sistema tramite un modulo d’ambiente, quindi dobbiamo dire a
-Snakemake di caricare il modulo prima di provare a eseguire la regola.
-Snakemake conosce i moduli d’ambiente, che possono essere specificati
-tramite (un’altra) opzione:</p>
+Snakemake di caricare il modulo prima di provare a eseguirla. Snakemake
+conosce i moduli d’ambiente, che possono essere specificati tramite
+(un’altra) opzione:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1349,9 +1348,9 @@ regola e rieseguire Snakemake.</p>
 quanto abbiamo eseguito solo su un core. Come si fa a richiedere
 l’esecuzione su più core per una singola regola?</p>
 <p>Snakemake ha un supporto generale per MPI, ma l’unico esecutore che
-attualmente supporta esplicitamente MPI è l’esecutore Slurm (per nostra
-fortuna!). Se guardiamo alla nostra tabella di traduzione da Slurm a
-Snakemake, notiamo che le opzioni rilevanti appaiono in fondo:</p>
+attualmente supporta esplicitamente MPI è Slurm (per nostra fortuna!).
+Se guardiamo alla nostra tabella di traduzione da Slurm a Snakemake,
+notiamo che le opzioni rilevanti appaiono in fondo:</p>
 <table class="table">
 <colgroup>
 <col width="18%">
@@ -1421,13 +1420,13 @@ sintassi di questo carattere jolly è la seguente</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>output: <span class="st">"amdahl_run_</span><span class="sc">{parallel_tasks}</span><span class="st">.txt"</span></span></code></pre>
 </div>
 <p>dove <code>parallel_tasks</code> è il nostro carattere jolly.</p>
-<div id="caratteri-jolly" class="callout">
+<div id="wildcards-or-caratteri-jolly" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Richiamo</span>
-<div id="caratteri-jolly" class="callout-inner">
-<h3 class="callout-title">Caratteri jolly</h3>
+<div id="wildcards-or-caratteri-jolly" class="callout-inner">
+<h3 class="callout-title">Wildcards or Caratteri jolly</h3>
 <div class="callout-content">
 <p>I caratteri jolly sono usati nelle righe <code>input</code> e
 <code>output</code> della regola per rappresentare parti di nomi di
@@ -1465,17 +1464,17 @@ tre fasi distinte:</p>
 tutte le regole che conosce</li>
 <li>Compila i caratteri jolly per ottenere il valore <code>input</code>
 per questa regola</li>
-<li>verifica che questo file di input (se richiesto) sia effettivamente
+<li>Verifica che questo file di input (se richiesto) sia effettivamente
 disponibile</li>
 </ol>
 </li>
 <li>Esegue i passi:
 <ol style="list-style-type: decimal">
-<li>Crea la directory per il file di output, se necessario</li>
+<li>Crea la cartella per il file di output, se necessario</li>
 <li>Rimuove il vecchio file di output, se è già presente</li>
 <li>Solo allora, esegue il comando di shell con i segnaposto
 sostituiti</li>
-<li>controlla che il comando sia stato eseguito senza errori <em>e</em>
+<li>Controlla che il comando sia stato eseguito senza errori <em>e</em>
 che il nuovo file di output sia stato creato come previsto</li>
 </ol>
 </li>
@@ -1585,13 +1584,12 @@ argomenti, possiamo usarli per impostare il valore di
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>      <span class="co">"amdahl"</span></span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>    resources:</span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>      mpi<span class="op">=</span><span class="st">"mpiexec"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>      <span class="co"># No direct way to access the wildcard in tasks, so we need to do this</span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>      <span class="co"># indirectly by declaring a short function that takes the wildcards as an</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>      <span class="co"># argument</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>    <span class="bu">input</span>:</span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>    shell:</span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl &gt; {output}"</span></span></code></pre>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>      <span class="co"># Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>      <span class="co"># wildcard come argomento.</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>    shell:</span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl &gt; {output}"</span></span></code></pre>
 </div>
 <p>Ora abbiamo una regola che può essere usata per generare output da
 esecuzioni di un numero arbitrario di task paralleli.</p>
@@ -1612,11 +1610,10 @@ leggibile, e questo vale anche per Snakefiles.</p>
 </div>
 <p>Poiché la nostra regola è ora in grado di generare un numero
 arbitrario di file di output, le cose potrebbero diventare molto
-affollate nella nostra directory corrente. Probabilmente è meglio
-mettere le esecuzioni in una cartella separata per mantenere l’ordine.
-Possiamo aggiungere la cartella direttamente al nostro
-<code>output</code> e Snakemake si occuperà della creazione della
-directory per noi:</p>
+affollate nella nostra cartella corrente. Probabilmente è meglio mettere
+le esecuzioni in una cartella separata per mantenere l’ordine. Possiamo
+aggiungere la cartella direttamente al nostro <code>output</code> e
+Snakemake si occuperà della creazione della directory per noi:</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1627,13 +1624,12 @@ directory per noi:</p>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>      <span class="co">"amdahl"</span></span>
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>    resources:</span>
 <span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>      mpi<span class="op">=</span><span class="st">"mpiexec"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>      <span class="co"># No direct way to access the wildcard in tasks, so we need to do this</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>      <span class="co"># indirectly by declaring a short function that takes the wildcards as an</span></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>      <span class="co"># argument</span></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>    <span class="bu">input</span>:</span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>    shell:</span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl &gt; {output}"</span></span></code></pre>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>      <span class="co"># Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>      <span class="co"># wildcard come argomento.</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>    shell:</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl &gt; {output}"</span></span></code></pre>
 </div>
 <div id="challenge3" class="callout challenge">
 <div class="callout-square">
@@ -1709,23 +1705,22 @@ nostro comando <code>shell</code> e cambiamo il formato del file
 <span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>      <span class="co">"amdahl"</span></span>
 <span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>    resources:</span>
 <span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>      mpi<span class="op">=</span><span class="st">"mpiexec"</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>      <span class="co"># No direct way to access the wildcard in tasks, so we need to do this</span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>      <span class="co"># indirectly by declaring a short function that takes the wildcards as an</span></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>      <span class="co"># argument</span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>    <span class="bu">input</span>:</span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>    shell:</span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl --terse &gt; {output}"</span></span></code></pre>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>      <span class="co"># Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>      <span class="co"># wildcard come argomento.</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>    shell:</span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl --terse &gt; {output}"</span></span></code></pre>
 </div>
 <p>C’era un altro parametro per <code>amdahl</code> che ha attirato la
 mia attenzione. <code>amdahl</code> ha un’opzione
 <code>--parallel-proportion</code> (o <code>-p</code>) che potremmo
 essere interessati a cambiare perché modifica il comportamento del
 codice e quindi ha un impatto sui valori che otteniamo nei nostri
-risultati. Aggiungiamo un altro livello di directory al nostro formato
-di output per riflettere una scelta particolare per questo valore.
-Possiamo usare un carattere jolly in modo da non dover scegliere subito
-il valore:</p>
+risultati. Aggiungiamo un altro livello di cartelle al nostro formato di
+output per riflettere una scelta particolare per questo valore. Possiamo
+usare un carattere jolly in modo da non dover scegliere subito il
+valore:</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1736,13 +1731,12 @@ il valore:</p>
 <span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>      <span class="co">"amdahl"</span></span>
 <span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>    resources:</span>
 <span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>      mpi<span class="op">=</span><span class="st">"mpiexec"</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>      <span class="co"># No direct way to access the wildcard in tasks, so we need to do this</span></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>      <span class="co"># indirectly by declaring a short function that takes the wildcards as an</span></span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>      <span class="co"># argument</span></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>    <span class="bu">input</span>:</span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>    shell:</span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl --terse -p {wildcards.parallel_proportion} &gt; {output}"</span></span></code></pre>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>      <span class="co"># Non esiste un modo diretto per accedere al wildcard nei task, quindi dobbiamo        # farlo in modo indiretto, dichiarando una piccola funzione che accetta i</span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>      <span class="co"># wildcard come argomento.</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>      tasks<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="bu">int</span>(wildcards.parallel_tasks)</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>    shell:</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>        <span class="co">"{resources.mpi} -n {resources.tasks} amdahl --terse -p {wildcards.parallel_proportion} &gt; {output}"</span></span></code></pre>
 </div>
 <div id="challenge4" class="callout challenge">
 <div class="callout-square">
