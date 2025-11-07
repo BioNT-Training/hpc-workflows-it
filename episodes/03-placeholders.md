@@ -23,7 +23,7 @@ Il nostro Snakefile presenta alcune duplicazioni. Per esempio, i nomi dei file d
 
 ## D.R.Y. (Don't Repeat Yourself)
 
-In molti linguaggi di programmazione, la maggior parte delle caratteristiche del linguaggio serve a consentire al programmatore di descrivere lunghe routine di calcolo come codice breve, espressivo e bello. Le caratteristiche di Python, R o Java, come le variabili e le funzioni definite dall'utente, sono utili in parte perché ci evitano di dover scrivere (o pensare) tutti i dettagli più volte. Questa buona abitudine di scrivere le cose solo una volta è nota come principio "Non ripetere te stesso" o D.R.Y.
+In molti linguaggi di programmazione, la maggior parte delle caratteristiche del linguaggio serve a consentire al programmatore di descrivere lunghe routine di calcolo come codice breve, espressivo e bello. Le caratteristiche di Python, R o Java, come le variabili e le funzioni definite dall'utente, sono utili in parte perché ci evitano di dover scrivere (o pensare) tutti i dettagli più volte. Questa buona abitudine di scrivere le cose solo una volta è nota come principio "Non ripeterti" o D.R.Y.
 
 :::
 
