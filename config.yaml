@@ -80,7 +80,9 @@ profiles:
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
 url: 'https://carpentries-incubator.github.io/hpc-workflows'
-analytics: carpentries
+analytics: |
+  <script defer data-domain="biont-training.github.io" src="https://plausible.galaxyproject.eu/js/script.js"></script>
+
 lang: it
 
 languages:
