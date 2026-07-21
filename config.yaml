@@ -27,13 +27,13 @@ life_cycle: 'pre-alpha'
 license: 'CC-BY-4.0'  # SPDX identifier
 
 # Link to the source repository for this lesson
-source: 'https://github.com/carpentries-incubator/hpc-workflows'
+source: 'https://github.com/BioNT-Training/hpc-workflows-it'
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'maintainers-hpc@lists.carpentries.org'
+contact: 'contact@biont-training.eu'
 
 # Navigation ------------------------------------------------
 #
